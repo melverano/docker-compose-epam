@@ -1,13 +1,38 @@
-version: '3.5'
+version: '3.9'
 
 services:
   nginx:
-    build: ./nginx/
+    image: localhost:5000/epam/nginx:v.0.1
+    volumes:
+      - './app:/var/www/html/'
+#Добавил по заданию, но это будет работать только в swarm или docker stack
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
+    ports:
+      - "8081:80"
     networks:
       - nginx
 
   apache:
-    build: ./apache/
+    image: localhost:5000/epam/apache:v.0.1
+    volumes:
+      - './app:/var/www/html/'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 50M
+        reservations:
+          cpus: '0.25'
+          memory: 20M
+    ports:
+      - "8082:80"
     networks:
       - apache
 
@@ -15,8 +40,6 @@ services:
 networks:
   nginx:
     name: nginx_network
-#    driver: custom-driver-1
 
   apache:
     name: apache_network
-#    driver: custom-driver-2

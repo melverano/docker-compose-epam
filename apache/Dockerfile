@@ -1,3 +1,4 @@
-FROM httpd
-COPY ./index.html /usr/local/apache2/htdocs/index.html
+FROM httpd:latest
 COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
+RUN mkdir -p /var/www/html/
+EXPOSE 80
