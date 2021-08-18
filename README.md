@@ -1,2 +1,2 @@
-# docker-compose-epam
+# docker-compose
 Docker-compose practice task
